@@ -13,13 +13,16 @@
     <form action="/" method="post">
         <input type="text" name="city" placeholder="Enter a city" required>
         <button type="submit">Submit</button>
-    <div>
+    </form>
+    <div class="cards">
         {% for city in cities %}
-        <div class="city-box"></div>
+        <div class="city-card">
+            <div class="temperature">70 degrees</div>
+            <div class="weather-state">Sunny</div>
+            <div class="city-name">{{ city }}</div>
+        </div>
         {% endfor %}
     </div>
-
-</form>
 
 </body>
 </html>
