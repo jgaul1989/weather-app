@@ -1,0 +1,7 @@
+.city-box {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin: 10px;
+    border: black 1px solid;
+}

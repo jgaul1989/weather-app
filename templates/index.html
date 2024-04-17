@@ -1,12 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Weather Application</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <h1>Enter a City</h1>
+    <form action="/" method="post">
+        <input type="text" name="city" placeholder="Enter a city" required>
+        <button type="submit">Submit</button>
+    <div>
+        {% for city in cities %}
+        <div class="city-box"></div>
+        {% endfor %}
+    </div>
 
-<p>Hello World!!!</p>
+</form>
 
 </body>
 </html>
