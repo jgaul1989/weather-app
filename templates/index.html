@@ -17,9 +17,9 @@
     <div class="cards">
         {% for city in cities %}
         <div class="city-card">
-            <div class="temperature">70 degrees</div>
-            <div class="weather-state">Sunny</div>
-            <div class="city-name">{{ city }}</div>
+            <div class="temperature">{{ city.temp }}</div>
+            <div class="weather-state">{{ city.weather_state }}</div>
+            <div class="city-name">{{ city.city_name }}</div>
         </div>
         {% endfor %}
     </div>
