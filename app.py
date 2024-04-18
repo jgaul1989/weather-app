@@ -1,24 +1,20 @@
-from flask import Flask, render_template, request
-from dotenv import load_dotenv
-import os
-from utils.city_service import create_cities, add_city
-
-load_dotenv()
-api_key = os.getenv('OPEN_WEATHER_API_KEY')
-
-app = Flask(__name__)
-cities = create_cities(api_key)
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        city_name = request.form.get("city")
-        zipcode = request.form.get("zipcode")
-        city = add_city(city_name, zipcode, api_key)
-        cities.append(city)
-    return render_template('index.html', cities=cities)
+db = SQLAlchemy()
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+def create_app():
+    app = Flask(__name__)
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///weather.db"
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(app)
+
+    from routes.home import home
+    app.register_blueprint(home)
+
+    with app.app_context():
+        from models.city import City
+        db.create_all()
+    return app
