@@ -14,3 +14,10 @@ def create_default_cities():
             city = City(city_id=city_id, city_name=name, weather_state=state, temp=temp, lat=lat, lon=lon)
             db.session.add(city)
         db.session.commit()
+
+
+def select_all_cities():
+    stmt = db.select(City).order_by(City.city_name)
+    result = db.session.execute(stmt)
+    cities = result.scalars().all()
+    return cities
