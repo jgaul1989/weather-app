@@ -14,6 +14,6 @@ def get_weather_info_by_zip(zip_code, api_key):
     response = requests.get(url)
     data = response.json()
     print(data)
-    return data["weather"][0]["main"], data["main"]["temp"]
+    return data["weather"][0]["main"], data["main"]["temp"], data["coord"]["lat"], data["coord"]["lon"]
 
 
