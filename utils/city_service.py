@@ -1,5 +1,5 @@
 from models.city import City
-from .api_utils import get_weather_info_by_coordinates
+from .api_utils import get_weather_info_by_coordinates, get_weather_info_by_zip
 
 
 def create_cities(api_key):
@@ -14,3 +14,9 @@ def create_cities(api_key):
         city = City.create_city(name, state, temp)
         cities.append(city)
     return cities
+
+
+def add_city(name, zipcode, api_key):
+    state, temp = get_weather_info_by_zip(zipcode, api_key)
+    city = City.create_city(name, state, temp)
+    return city
