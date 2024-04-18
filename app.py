@@ -15,6 +15,8 @@ def create_app():
     app.register_blueprint(home)
 
     with app.app_context():
+        from utils.db_utils import create_default_cities
         from models.city import City
         db.create_all()
+        create_default_cities()
     return app

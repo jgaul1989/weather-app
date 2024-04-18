@@ -1,13 +1,19 @@
+from sqlalchemy.orm import Mapped, mapped_column
+from app import db
 
-class City:
-    def __init__(self, city_id, name, state, temp, lat, lon):
-        self.city_id = city_id
-        self.city_name = name
-        self.weather_state = state
-        self.temp = temp
-        self.lat = lat
-        self.lon = lon
+
+class City(db.Model):
+    __tablename__ = 'city'
+    city_id: Mapped[int] = mapped_column(db.Integer, primary_key=True)
+    city_name: Mapped[str] = mapped_column(db.String(100))
+    weather_state: Mapped[str] = mapped_column(db.String(50))
+    temp: Mapped[float] = mapped_column(db.Float)
+    lat: Mapped[float] = mapped_column(db.Float)
+    lon: Mapped[float] = mapped_column(db.Float)
 
     @classmethod
     def create_city(cls, city_id, name, state, temp, lat, lon):
         return cls(city_id, name, state, temp, lat, lon)
+
+    def __repr__(self):
+        return f"City {self.city_name}"
