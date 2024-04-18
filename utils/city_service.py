@@ -10,13 +10,13 @@ def create_cities(api_key):
         ("Houston", "29.763281", "-95.363274")
     ]
     for name, lat, lon in city_data:
-        state, temp = get_weather_info_by_coordinates(api_key, lat, lon)
-        city = City.create_city(name, state, temp, lat, lon)
+        state, temp, city_id = get_weather_info_by_coordinates(api_key, lat, lon)
+        city = City.create_city(city_id, name, state, temp, lat, lon)
         cities.append(city)
     return cities
 
 
 def add_city(name, zipcode, api_key):
-    state, temp, lat, lon = get_weather_info_by_zip(zipcode, api_key)
-    city = City.create_city(name, state, temp, lat, lon)
+    state, temp, lat, lon, city_id = get_weather_info_by_zip(zipcode, api_key)
+    city = City.create_city(city_id, name, state, temp, lat, lon)
     return city
