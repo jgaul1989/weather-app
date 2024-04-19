@@ -10,10 +10,7 @@ class City(db.Model):
     temp: Mapped[float] = mapped_column(db.Float)
     lat: Mapped[float] = mapped_column(db.Float)
     lon: Mapped[float] = mapped_column(db.Float)
-
-    @classmethod
-    def create_city(cls, city_id, name, state, temp, lat, lon):
-        return cls(city_id, name, state, temp, lat, lon)
+    zipcode: Mapped[str] = mapped_column(db.String(50))
 
     def __repr__(self):
         return f"City {self.city_name}"

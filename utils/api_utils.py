@@ -6,7 +6,7 @@ def get_weather_info_by_coordinates(api_key, lat, lon):
     response = requests.get(url)
     data = response.json()
     print(data)
-    return data["weather"][0]["main"], data["main"]["temp"], data["id"]
+    return data["weather"][0]["main"], data["main"]["temp"]
 
 
 def get_weather_info_by_zip(zip_code, api_key):
@@ -14,6 +14,6 @@ def get_weather_info_by_zip(zip_code, api_key):
     response = requests.get(url)
     data = response.json()
     print(data)
-    return data["weather"][0]["main"], data["main"]["temp"], data["coord"]["lat"], data["coord"]["lon"], data["id"]
+    return data["weather"][0]["main"], data["main"]["temp"], data["coord"]["lat"], data["coord"]["lon"]
 
 
