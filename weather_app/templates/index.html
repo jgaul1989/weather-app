@@ -11,8 +11,8 @@
 <body>
     <h1>Enter a City</h1>
     <form action="/" method="post">
-        <input type="text" name="city" placeholder="Enter a city" required>
-        <input type="text" name="zipcode" placeholder="Enter the zipcode" required>
+        <input type="text" name="city" pattern="[a-zA-Z]{3,}" title="At least 3 letters required" placeholder="Enter a city" required>
+        <input type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" placeholder="Enter the zipcode" required>
         <button type="submit">Submit</button>
     </form>
     <div class="cards">
