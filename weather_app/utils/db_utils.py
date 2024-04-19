@@ -1,6 +1,7 @@
 from weather_app.models.city import City
 from .api_utils import get_weather_info_by_zip
 from weather_app.extensions import db
+from sqlalchemy.exc import IntegrityError
 
 
 def create_default_cities():
@@ -19,9 +20,23 @@ def create_default_cities():
 
 def create_city(name, zipcode, api_key):
     state, temp, lat, lon = get_weather_info_by_zip(zipcode, api_key)
-    city = City(city_name=name, weather_state=state, temp=temp, lat=lat, lon=lon, zipcode=zipcode)
-    db.session.add(city)
-    db.session.commit()
+    if state and temp and lat and lon:
+        try:
+            city = City(city_name=name, weather_state=state, temp=temp, lat=lat, lon=lon, zipcode=zipcode)
+            db.session.add(city)
+            db.session.commit()
+        except IntegrityError:
+            print(f"{zipcode} already exists")
+            db.session.rollback()
+            return False
+        except Exception as e:
+            print(f"Database error: {e}")
+            db.session.rollback()
+            return False
+    else:
+        print("Failed to create weather card for the city")
+        return False
+    return True
 
 
 def select_all_cities():
