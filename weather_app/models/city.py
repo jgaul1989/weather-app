@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column
-from app import db
+from weather_app.extensions import db
 
 
 class City(db.Model):

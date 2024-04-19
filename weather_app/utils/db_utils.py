@@ -1,6 +1,6 @@
-from models.city import City
+from weather_app.models.city import City
 from .api_utils import get_weather_info_by_zip
-from app import db
+from weather_app.extensions import db
 
 
 def create_default_cities():
