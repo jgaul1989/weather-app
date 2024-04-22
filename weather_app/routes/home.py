@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from weather_app.utils.db_utils import select_all_cities, create_city
+from weather_app.utils.db_utils import select_all_cities, create_city, remove_city
 from dotenv import load_dotenv
 import os
 
@@ -15,8 +15,8 @@ def crud():
     crud_action = request.form.get('crud-action')
     if crud_action == 'add':
         create_city(city, zipcode, api_key)
-    else:
-        print('Hello World!!')
+    elif crud_action == 'remove':
+        remove_city(zipcode)
     return redirect(url_for('home.index'))
 
 

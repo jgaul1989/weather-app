@@ -19,6 +19,22 @@ def create_default_cities():
         db.session.commit()
 
 
+def remove_city(zipcode):
+    try:
+        stmt = db.select(City).filter_by(zipcode=zipcode)
+        result = db.session.execute(stmt)
+        city = result.scalar_one_or_none()
+
+        if city:
+            db.session.delete(city)
+            db.session.commit()
+            flash('City successfully removed.', 'info')
+        else:
+            flash('City not found.', 'info')
+    except Exception as e:
+        flash(f'Something went wrong {e}', 'error')
+
+
 def create_city(name, zipcode, api_key):
     state, temp, lat, lon = get_weather_info_by_zip(zipcode, api_key)
     if state and temp and lat and lon:
