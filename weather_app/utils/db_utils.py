@@ -2,6 +2,7 @@ from weather_app.models.city import City
 from .api_utils import get_weather_info_by_zip
 from weather_app.extensions import db
 from sqlalchemy.exc import IntegrityError
+from flask import flash
 
 
 def create_default_cities():
@@ -27,14 +28,15 @@ def create_city(name, zipcode, api_key):
             db.session.commit()
         except IntegrityError:
             print(f"{zipcode} already exists")
+            flash("City already exists", "error")
             db.session.rollback()
             return False
         except Exception as e:
             print(f"Database error: {e}")
+            flash("Database error", "error")
             db.session.rollback()
             return False
     else:
-        print("Failed to create weather card for the city")
         return False
     return True
 

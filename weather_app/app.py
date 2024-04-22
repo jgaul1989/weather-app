@@ -4,6 +4,7 @@ from weather_app.extensions import db
 
 def create_app():
     app = Flask(__name__)
+    app.secret_key = 'secretkey'
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///weather.db"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)

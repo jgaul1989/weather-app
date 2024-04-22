@@ -1,4 +1,5 @@
 import requests
+from flask import flash
 
 
 def get_weather_info_by_coordinates(api_key, lat, lon):
@@ -19,12 +20,16 @@ def get_weather_info_by_zip(zip_code, api_key):
         else:
             raise ValueError("Incomplete data received from weather service")
     except requests.exceptions.HTTPError as http_err:
+        flash(f'An error occurred: {http_err}', "error")
         print(f"HTTP error occurred: {http_err}")
     except requests.exceptions.Timeout:
+        flash("Timeout occurred", "error")
         print("The request timed out")
     except requests.exceptions.RequestException as err:
+        flash("There was an error while fetching weather information", "error")
         print(f"Request error occurred: {err}")
     except ValueError as ve:
+        flash("Incomplete data received from weather service", "error")
         print(f"Value error: {ve}")
     return None
 

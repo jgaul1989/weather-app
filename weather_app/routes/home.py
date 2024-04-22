@@ -8,18 +8,19 @@ api_key = os.getenv('OPEN_WEATHER_API_KEY')
 home = Blueprint('home', __name__, template_folder='templates')
 
 
-@home.route('/', methods=['GET', 'POST'])
+@home.route('/crud', methods=['POST'])
+def crud():
+    city = request.form.get('city')
+    zipcode = request.form.get('zipcode')
+    crud_action = request.form.get('crud-action')
+    if crud_action == 'add':
+        create_city(city, zipcode, api_key)
+    else:
+        print('Hello World!!')
+    return redirect(url_for('home.index'))
+
+
+@home.route('/', methods=['GET'])
 def index():
-    if request.method == 'POST':
-        city = request.form.get('city')
-        zipcode = request.form.get('zipcode')
-        if not city or not zipcode:
-            print("City and zipcode are required")
-            return redirect(url_for('home.index'))
-        if len(zipcode) != 5 or not zipcode.isdigit():
-            print("Zipcode must be 5 digits")
-            return redirect(url_for('home.index'))
-        if not create_city(city, zipcode, api_key):
-            return redirect(url_for('home.index'))
     cities = select_all_cities()
-    return render_template("index.html", cities=cities)
+    return render_template('index.html', cities=cities)
