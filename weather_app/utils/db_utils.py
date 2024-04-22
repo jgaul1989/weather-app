@@ -9,14 +9,12 @@ def create_default_cities():
 
     if City.query.first() is None:
         city_data = [
-            ("New York City", "Cloudy", 57, 40.714272, -74.005966, "10001"),
-            ("San Francisco", "Sunny", 76, 37.774929, -122.419418, "94016"),
-            ("Houston", "Sunny", 80, 29.763281, -95.363274, "77001")
+            ("New York City", "10001"),
+            ("San Francisco", "94016"),
+            ("Houston", "77001")
         ]
-        for name, state, temp, lat, lon, zipcode in city_data:
-            city = City(city_name=name, weather_state=state, temp=temp, lat=lat, lon=lon, zipcode=zipcode)
-            db.session.add(city)
-        db.session.commit()
+        for name, zipcode in city_data:
+            create_city(name, zipcode)
 
 
 def remove_city(zipcode):
