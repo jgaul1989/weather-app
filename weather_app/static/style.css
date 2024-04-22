@@ -74,7 +74,7 @@ button:hover {
     width: 300px;
 }
 
-.city-name, .temperature, .weather-state {
+.city-name, .temperature, .weather-state, .city-zip {
     margin: 5px 0;
 }
 
@@ -83,7 +83,7 @@ button:hover {
     font-weight: bold;
 }
 
-.weather-state {
+.weather-state, .city-zip {
     font-size: 18px;
     color: #666666;
 }
