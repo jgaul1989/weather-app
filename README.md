@@ -37,5 +37,5 @@ This Weather Application is a Flask-based web service that allows users to get c
 ### Usage
 - After launching the application, you can:
 - View Weather: The homepage displays the current weather conditions for cities added to your watch list.
-- Add a City: Use the form to add a new city by entering its name.
-- Remove a City: Each city card has a delete button to remove the city from your watch list.
+- Add a City: Use the form to add a new city by entering its name, zipcode and choosing add from the dropdown menu.
+- Remove a City: Use the form to remove a city by entering its name, zipcode and choosing remove from the dropdown menu.
