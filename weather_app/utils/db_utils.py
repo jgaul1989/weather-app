@@ -35,8 +35,8 @@ def remove_city(zipcode):
         flash(f'Something went wrong {e}', 'error')
 
 
-def create_city(name, zipcode, api_key):
-    state, temp, lat, lon = get_weather_info_by_zip(zipcode, api_key)
+def create_city(name, zipcode):
+    state, temp, lat, lon = get_weather_info_by_zip(zipcode)
     if state and temp and lat and lon:
         try:
             city = City(city_name=name, weather_state=state, temp=temp, lat=lat, lon=lon, zipcode=zipcode)
